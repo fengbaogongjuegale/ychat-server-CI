@@ -6,6 +6,7 @@ class W extends CI_Controller
 
     public function index()
     {
+        echo "lll";
 
     }
 
@@ -31,6 +32,7 @@ class W extends CI_Controller
         if (isset($dbData[0]['password']))
             $plaintext_string = $this->encrypt->decode($dbData[0]['password']);
         if ($plaintext_string == $password) {
+
             $Data = $dbData;
             $Data['success'] = true;
             $token = $this->encrypt->encode($account + time());
@@ -38,25 +40,26 @@ class W extends CI_Controller
             $Data['token'] = $token;
         } else {
             $Data['success'] = false;
+
         }
         echo json_encode($Data);
         // echo $this->input->post('password');
     }
 
-    public  function  searchfri(){
-        $searchname = $this->input->post('searchname');
-
-        $dbData = $this->db->get_where('whyuser', array('account' => $searchname))->result_array();
-
-        $Data = null;
-
-        if(sizeof($dbData)==0){
-            $Data['success'] = false;
-        }else{
-            $Data = $dbData;
-            $Data['success'] = true;
-        }
-        echo json_encode($Data);
-
-    }
+//    public  function  searchfri(){
+//        $searchname = $this->input->post('searchname');
+//
+//        $dbData = $this->db->get_where('whyuser', array('account' => $searchname))->result_array();
+//
+//        $Data = null;
+//
+//        if(sizeof($dbData)==0){
+//            $Data['success'] = false;
+//        }else{
+//            $Data = $dbData;
+//            $Data['success'] = true;
+//        }
+//        echo json_encode($Data);
+//
+//    }
 }
